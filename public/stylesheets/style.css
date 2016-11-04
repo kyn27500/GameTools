@@ -1,8 +1,12 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*padding: 10px;*/
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+button{
+	width:180px;
+	height:40px
+}
 a {
   color: #00B7FF;
 }
