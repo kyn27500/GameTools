@@ -2,22 +2,24 @@
 <html>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<head>
-	<title><%= title %></title>
+	<title>游戏工具</title>
 	<script type="text/javascript">
 	  function onClick(pId){
 	    // var gameNum = document.getElementById("gameNum").value
-	    // window.location.href = "?id="+pId;
-	    alert(pId)
+	    window.location.href = "?id="+pId;
 	  }
 	</script>
 	</head>
   <body>
-    <h1><%= title %></h1>
-   	<button onclick="onClick(1)">test1</button>
-   	<button onclick="onClick(2)">test2</button>
-   	<button onclick="onClick(3)">test3</button>
-   	<button onclick="onClick(4)">test4</button>
+    <h1>游戏工具</h1>
+   	<button onclick="onClick(1)">数据转换</button>
+   	<button onclick="onClick(2)">热更新</button>
+   	<button onclick="onClick(3)">打包</button>
+   	<button onclick="onClick(4)">检查重复资源</button>
    	<button onclick="onClick(5)">test5</button>
-   	<button onclick="onClick(6)">test6</button>
+   	<button onclick="onClick(6)">打包</button>
+
+   	<br>
+   	<p id="text"><%= text %></p>
   </body>
 </html>
