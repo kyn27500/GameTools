@@ -1,4 +1,4 @@
--- Filename: DB_Testexcel.lua
+-- Filename: DB_004.lua
 -- Author: auto-created by kong`s ParseExcel(to lua) tool.
 -- methods: X.keys = {}, X.getDataById(id), X.getArrDataByField(fieldName, fieldValue)
 -- Function: no description.
@@ -22,5 +22,5 @@ local data = {
 	id12={12, 5, 3, 2, 5, 3, 2, -1, -1, "-1.0", -1},
 }
 
-DB_Testexcel = DB_Template.new (keys, data)
-return DB_Testexcel
+DB_004 = DB_Template.new (keys, data)
+return DB_004
