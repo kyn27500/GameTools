@@ -65,10 +65,16 @@ def checksamefile():
                     print("******************************")
                     for p in pathArr:
                         print(p)
-                        
-findfiles(findPath)
-checksamefile()
 
-print("search over !")
+if __name__ == '__main__':
+    
+    # 获取外部传入的参数
+    if sys.argv[1]:
+        findPath = sys.argv[1]
+                                                     
+    findfiles(findPath)
+    checksamefile()
+
+    print("search over !")
 # raw_input()
                 
