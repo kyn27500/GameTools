@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var resp;
+var config = require("./config.js")
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -9,7 +10,10 @@ router.get('/', function(req, res, next) {
 	var id = req.query.id;
 	resp = res;
 
-	printToHtml('欢迎使用在线工具，如有建议，请联系作者！');
+	// printToHtml('欢迎使用在线工具，如有建议，请联系作者！');
+	printToHtml(config);
+
+
 });
 
 

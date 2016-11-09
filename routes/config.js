@@ -2,7 +2,7 @@
 
 var config ={}
 
-config.excelPath = "/Users/wangmeili/Documents/workspace/nodejs/GameTools/test"
-config.excelToLuaPath = "/Users/wangmeili/Documents/workspace/nodejs/GameTools/test/out"
+config.excelPath = "/Users/koba/Documents/workspace/NodeJs/gametools/test"
+config.excelToLuaPath = "/Users/koba/Documents/workspace/NodeJs/gametools/test/out"
 
 return config

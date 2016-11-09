@@ -254,9 +254,11 @@ def print_test(a,b):
 if __name__ == '__main__':
 
 	# 获取外部传入的参数
-	# xls_path = sys.argv[1]
-	# lua_path = sys.argv[2]
+	if sys.argv[1] and sys.argv[1]:
+		xls_path = sys.argv[1]
+		lua_path = sys.argv[2]
 
+	
 	# TODO 更新excel SVN
 	_isError = False
 
