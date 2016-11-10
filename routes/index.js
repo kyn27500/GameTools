@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var resp;
-var config = require("./config.json")
+
+// 配置文件，0在家里使用，1在公司使用
+var config = require("./config.json")[1]
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -29,7 +31,8 @@ router.get('/', function(req, res, next) {
 	else if(id==5){
 		// 测试svn
 		var scriptPath = process.cwd()+ "/routes/svn.py";
-
+		var cmd = scriptPath
+		execPy(cmd)
 	}
 	else{
 		printToHtml('欢迎使用在线工具，如有建议，请联系作者！');

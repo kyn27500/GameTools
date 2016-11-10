@@ -54,10 +54,10 @@ def svnadd(pSvnPath):
 	return ret[1]
 
 def test():
-	print("test----------------")
 	# str1 = getVesionCode(svnPath)
 	# str1 = svnadd(svnPath)
-	str1 = svncommit(svnPath)
+	# str1 = svncommit(svnPath)
+	str1 = svnupdate(svnPath)
 	print "当前版本号：" + str1
 
 if __name__ == '__main__':
