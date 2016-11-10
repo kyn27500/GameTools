@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
 var resp;
 
@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 	if(id==1){
 		// 数据转换
-		var scriptPath = process.cwd()+ "/routes/ExcelToLua.py";
+		var scriptPath = process.cwd()+ "/routes/ExcelToLua.py"
 		var cmd = scriptPath+' '+config.excelPath+' '+config.excelToLuaPath
 		execPy(cmd)
 	}
@@ -22,20 +22,21 @@ router.get('/', function(req, res, next) {
 		// 热更新
 	}	
 	else if(id==4){
+
 		// 检查相同文件
-		var scriptPath = process.cwd()+ "/routes/checkSameFile.py";
+		var scriptPath = process.cwd()+ "/routes/checkSameFile.py"
 		var cmd = scriptPath+' '+config.sameFilePath
 		execPy(cmd)
 
 	}
 	else if(id==5){
 		// 测试svn
-		var scriptPath = process.cwd()+ "/routes/svn.py";
-		var cmd = scriptPath
+		var scriptPath = process.cwd()+ "/routes/svn.py"
+		var cmd = scriptPath+" "+config.svntest+" 4"
 		execPy(cmd)
 	}
 	else{
-		printToHtml('欢迎使用在线工具，如有建议，请联系作者！');
+		printToHtml('欢迎使用在线工具，如有建议，请联系作者！')
 	}
 
 

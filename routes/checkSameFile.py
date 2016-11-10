@@ -63,17 +63,26 @@ def checksamefile():
             for md5key,pathArr in md5s.items():
                 if len(pathArr) > 1:
                     print("******************************")
+                    count = 1
                     for p in pathArr:
-                        print(p)
+                        print("%s:%s" % (count,p))
+                        count = count + 1
+# 
+def test(findPath):
+    findfiles(findPath)
+    checksamefile()
+
+# svn 更新功能
+def svnupdate(findPath):
+    import svn
+    svn.svnupdate()
 
 if __name__ == '__main__':
     
     # 获取外部传入的参数
-    if sys.argv[1]:
+    if len(sys.argv)==2:
         findPath = sys.argv[1]
-                                                     
-    findfiles(findPath)
-    checksamefile()
+    test(findPath)
 
     print("search over !")
 # raw_input()

@@ -7,6 +7,7 @@
 	{
 	"excelPath":"/Users/koba/Documents/workspace/NodeJs/gametools/test",
 	"excelToLuaPath":"/Users/koba/Documents/workspace/NodeJs/gametools/test/out",
-	"sameFilePath":"/Users/koba/Documents/workspace/NodeJs/gametools/test"
+	"sameFilePath":"/Users/koba/Documents/workspace/NodeJs/gametools/test",
+	"svntest":"/Users/koba/Documents/workspace/testsvn/src"
 	}
 ]
