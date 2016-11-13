@@ -4,7 +4,7 @@ var router = express.Router()
 var resp;
 
 // 配置文件，0在家里使用，1在公司使用
-var config = require("./config.json")[1]
+var config = require("./config.json")[0]
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 	else if(id==5){
 		// 测试svn
 		var scriptPath = process.cwd()+ "/routes/svn.py"
-		var cmd = scriptPath+" "+config.svntest+" 4"
+		var cmd = scriptPath+" "+config.svntest+" 2"
 		execPy(cmd)
 	}
 	else{
