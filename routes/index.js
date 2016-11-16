@@ -4,6 +4,8 @@ var router = express.Router()
 var resp;
 
 var lock = 0
+
+var tab =' '
 // 配置文件，0在家里使用，1在公司使用
 var config = require("./config.json")[0]
 /* GET home page. */
@@ -20,7 +22,12 @@ router.get('/', function(req, res, next) {
 		execPy(cmd)
 	}
 	else if(id==2){
+
 		// 热更新
+		var scriptPath = process.cwd()+ "/routes/diff.py"
+		var param = [scriptPath,config.diff_old,config.diff_new,config.diff_update,config.diff_zip]
+		var cmd = param.join(' ')
+		execPy(cmd)
 	}	
 	else if(id==4){
 

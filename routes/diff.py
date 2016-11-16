@@ -100,8 +100,7 @@ def dealFile(newPath , count):
 	shutil.copyfile(newPath,diffPath)
 
 	count = count + 1
-	print(count)
-	print("Update File: %s" % diffPath.replace(m_diff_path,"") )
+	print("%s:%s" % (str(count),diffPath.replace(m_diff_path,"")))
 	return count
 
 def dozip():
@@ -122,10 +121,17 @@ def dozip():
 
 if  __name__ ==  "__main__":
 
+	# 获取外部传入的参数
+	if len(sys.argv)==5:
+		m_old_path = sys.argv[1]
+		m_new_path = sys.argv[2]
+		m_diff_path= sys.argv[3]
+		m_zip_path = sys.argv[4]
+
 	# 清理old文件夹下的config文件
 	new_config_path = os.path.join(m_new_path,m_config_name)
 	if os.path.exists(new_config_path):
-		print("-- clean up :" + new_config_path)
+		# print("-- clean up :" + new_config_path)
 		os.remove(new_config_path)
 
 	# 清空差异文件夹
@@ -167,7 +173,7 @@ if  __name__ ==  "__main__":
 	else:	
 		oldFileTool.saveConfigFile(oldmap)
 		print("\ndifferent success!")
-		print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
+		# print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
 		dozip()
 		
 	# raw_input()
