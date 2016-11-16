@@ -250,16 +250,27 @@ def parseExcel(filePath,fileName):
 def print_test(a,b):
 	print(a,b)
 
+def svnupdate(dirPath):
+	import svn
+	svn.svnupdate(dirPath)
+
+def svncommit(dirPath):
+	import svn
+	svn.svnadd(dirPath)
+	return svn.svncommit(dirPath)
 
 if __name__ == '__main__':
 
+	isUsedSvn = False
 	# 获取外部传入的参数
 	if sys.argv[1] and sys.argv[2]:
 		xls_path = sys.argv[1]
 		lua_path = sys.argv[2]
-		
-	# TODO 更新excel SVN
 
+		isUsedSvn = True
+		# TODO 更新excel SVN
+		svnupdate(xls_path)
+	
 	_isError = False
 
 	if not os.path.exists(lua_path):
@@ -271,8 +282,16 @@ if __name__ == '__main__':
 	if _isError:
 		print("%s:*********************************** 文件名：%s , %s行  %s列" % (_errorDes[0],_errorDes[1],_errorDes[2],_errorDes[3]))
 	else:
-		print("数据转换完毕！")
 		# TODO 提交svn
+		print("数据转换完毕！")
+		if isUsedSvn:
+			version = svncommit(lua_path)
+			if version:
+				print("当前版本号：%s" % version)
+
+		
+		
+		
 
 
 

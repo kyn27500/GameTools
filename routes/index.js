@@ -3,6 +3,7 @@ var router = express.Router()
 
 var resp;
 
+var lock = 0
 // 配置文件，0在家里使用，1在公司使用
 var config = require("./config.json")[0]
 /* GET home page. */
@@ -36,9 +37,9 @@ router.get('/', function(req, res, next) {
 		execPy(cmd)
 	}
 	else{
+		
 		printToHtml('欢迎使用在线工具，如有建议，请联系作者！')
 	}
-
 
 });
 
