@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
 
 		// 热更新
 		var scriptPath = process.cwd()+ "/routes/diff.py"
-		var param = [scriptPath,config.diff_old,config.diff_new,config.diff_update,config.diff_zip]
+		var param = [scriptPath,config.diff_old,config.diff_new,config.diff_update,config.diff_zip,config.diff_svn]
 		var cmd = param.join(' ')
 		execPy(cmd)
 	}	

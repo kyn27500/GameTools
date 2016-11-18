@@ -121,12 +121,15 @@ def dozip():
 
 if  __name__ ==  "__main__":
 
+	_isUsedSvn = False
 	# 获取外部传入的参数
-	if len(sys.argv)==5:
+	if len(sys.argv)==6:
 		m_old_path = sys.argv[1]
 		m_new_path = sys.argv[2]
 		m_diff_path= sys.argv[3]
 		m_zip_path = sys.argv[4]
+		m_newsvn_path = sys.argv[5].split(",")
+		_isUsedSvn = True
 
 	# 清理old文件夹下的config文件
 	new_config_path = os.path.join(m_new_path,m_config_name)
@@ -145,6 +148,8 @@ if  __name__ ==  "__main__":
 		os.mkdir(m_new_path)
 	if not os.path.exists(m_zip_path):
 		os.mkdir(m_zip_path)
+
+	# TODO 更新svn 并拷贝文件到 对比文件夹中
 
 	# 旧版本 文件
 	oldFileTool = FileTool(m_old_path)

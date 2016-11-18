@@ -4,6 +4,10 @@
 	"excelToLuaPath":"/Users/wangmeili/Documents/workspace/svnnet/kyn27500.game/db",
 	"sameFilePath":"/Users/wangmeili/Documents/workspace/svnnet/kyn27500.game",
 	"svntest":"/Users/wangmeili/Documents/workspace/svnnet/kyn27500.game",
+	"diff_svn":[
+		"/Users/wangmeili/Documents/workspace/svnnet/kyn27500.game/src",
+		"/Users/wangmeili/Documents/workspace/svnnet/kyn27500.game/res"
+	],
 	"diff_old":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/routes/old",
 	"diff_new":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/routes/new",
 	"diff_update":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/routes/hot_update",
