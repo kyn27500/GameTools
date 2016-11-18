@@ -8,10 +8,10 @@
 		"/Users/wangmeili/Documents/workspace/svnnet/kyn27500.game/src",
 		"/Users/wangmeili/Documents/workspace/svnnet/kyn27500.game/res"
 	],
-	"diff_old":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/routes/old",
-	"diff_new":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/routes/new",
-	"diff_update":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/routes/hot_update",
-	"diff_zip":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/routes/zip"
+	"diff_old":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/old",
+	"diff_new":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/new",
+	"diff_update":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/hot_update",
+	"diff_zip":"/Users/wangmeili/Documents/workspace/nodejs/GameTools/zip"
 	},
 	{
 	"excelPath":"/Users/koba/Documents/workspace/NodeJs/gametools/test",
