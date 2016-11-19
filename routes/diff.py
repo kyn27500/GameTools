@@ -104,7 +104,7 @@ def dealFile(newPath , count):
 	return count
 
 def dozip():
-	zipName = "hot_update123.zip"
+	zipName = time.localtime()
 	f = zipfile.ZipFile(os.path.join(m_zip_path,zipName),'w',zipfile.ZIP_DEFLATED)
 	for dirpath, dirnames, filenames in os.walk(m_diff_path):
 		for filename in filenames:
@@ -118,6 +118,14 @@ def dozip():
 	print("\nzip name:%s" % zipName)
 	print("zip size:%d " % os.path.getsize(os.path.join(m_zip_path,zipName)))
 	print("zip finish time:" + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
+
+def svnupdate(dirPath):
+	import svn
+	return svn.svnupdate(dirPath)
+
+def copy(resouse,copyto):
+	import copyfile
+	copyfile.copyImage(resouse,copyto)
 
 if  __name__ ==  "__main__":
 
@@ -150,6 +158,12 @@ if  __name__ ==  "__main__":
 		os.mkdir(m_zip_path)
 
 	# TODO 更新svn 并拷贝文件到 对比文件夹中
+	if _isUsedSvn:
+		for k in m_newsvn_path:
+			svnupdate(k)
+			copy(k,m_new_path)
+
+
 
 	# 旧版本 文件
 	oldFileTool = FileTool(m_old_path)
