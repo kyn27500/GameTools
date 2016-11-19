@@ -104,7 +104,7 @@ def dealFile(newPath , count):
 	return count
 
 def dozip():
-	zipName = time.localtime()
+	zipName = str(int(time.time()))+".zip"
 	f = zipfile.ZipFile(os.path.join(m_zip_path,zipName),'w',zipfile.ZIP_DEFLATED)
 	for dirpath, dirnames, filenames in os.walk(m_diff_path):
 		for filename in filenames:
@@ -115,9 +115,13 @@ def dozip():
 
 	f.close()
 
-	print("\nzip name:%s" % zipName)
-	print("zip size:%d " % os.path.getsize(os.path.join(m_zip_path,zipName)))
-	print("zip finish time:" + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
+
+	# print("\nzip name:%s" % zipName)
+	# print("zip size:%d " % os.path.getsize(os.path.join(m_zip_path,zipName)))
+	# print("zip finish time:" + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
+	global zip_info
+	zipSize = str(os.path.getsize(os.path.join(m_zip_path,zipName)))
+	zip_info = [zipName,zipSize]
 
 def svnupdate(dirPath):
 	import svn
@@ -130,6 +134,7 @@ def copy(resouse,copyto):
 if  __name__ ==  "__main__":
 
 	_isUsedSvn = False
+	zip_info = []
 	# 获取外部传入的参数
 	if len(sys.argv)==6:
 		m_old_path = sys.argv[1]
@@ -188,11 +193,9 @@ if  __name__ ==  "__main__":
 
 	
 	if count ==0:
-		print("no different file !")
+		print("无差异文件!")
 	else:	
 		oldFileTool.saveConfigFile(oldmap)
-		print("\ndifferent success!")
-		# print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
 		dozip()
-		
+		print(zip_info)
 	# raw_input()
