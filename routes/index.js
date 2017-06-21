@@ -7,7 +7,7 @@ var lock = 0
 
 var tab =' '
 // 配置文件，0在家里使用，1在公司使用
-var config = require("./config.json")[0]
+var config = require("./config.json")[1]
 /* GET home page. */
 router.get('/', function(req, res, next) {
 

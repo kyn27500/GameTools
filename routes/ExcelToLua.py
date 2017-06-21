@@ -6,13 +6,18 @@ import os
 import sys
 import string
 import xlrd
+import json
 reload(sys)
 sys.setdefaultencoding('utf8') 
 
 # excel 路径
-xls_path = "/Users/koba/Documents/workspace/NodeJs/gametools/test"
+xls_path = "/Users/koba/Documents/workspace/kyn27500.game/xls"
 # lua文件导出的路径
-lua_path = "/Users/koba/Documents/workspace/NodeJs/gametools/test/out"
+lua_path = "/Users/koba/Documents/workspace/kyn27500.game/db"
+
+# svnVersionFile 文件
+svn_version_file = os.path.join(os.getcwd(),"lib/LocalFile.json")
+
 
 _errorDes = ["数据错误：","文件名","行数","列数"]
 _isError = False
@@ -214,16 +219,12 @@ def parseDataByType(pkeyType,pData):
 
 # 写文件
 def writeToLua(filePath,fileName,fileData):
-
 	fDirPath = os.path.dirname(filePath)
 	fDirPath = fDirPath.replace(xls_path,lua_path)
 	if not os.path.exists(fDirPath):
 		os.mkdir(fDirPath)
-
 	filePath = os.path.join(fDirPath,"%s.lua" % (fileName))
-	f = open(filePath,"w")
-	f.write(fileData)
-	f.close()
+	writeFile(filePath,fileData)
 
 # 解析 excel
 def parseExcel(filePath,fileName):
@@ -252,32 +253,57 @@ def print_test(a,b):
 
 def svnupdate(dirPath):
 	import svn
-	svn.svnupdate(dirPath)
+	return svn.svnupdate(dirPath)
 
 def svncommit(dirPath):
 	import svn
 	svn.svnadd(dirPath)
 	return svn.svncommit(dirPath)
 
+def writeFile(filePath,fileData):
+	f = open(filePath,"w")
+	f.write(fileData)
+	f.close()
+
+def readFile(filePath):
+	f = open(filePath,"r")
+	fileData = f.read()
+	f.close()
+	return fileData
+
 if __name__ == '__main__':
 
 	isUsedSvn = False
+	_isError = False
+	xlsVersion = 0
+	localFile = {}
 	# 获取外部传入的参数
-	if sys.argv[1] and sys.argv[2]:
+	if len(sys.argv)==3:
 		xls_path = sys.argv[1]
 		lua_path = sys.argv[2]
-
 		isUsedSvn = True
-		# TODO 更新excel SVN
-		svnupdate(xls_path)
-	
-	_isError = False
+		# 更新excel SVN
+		xlsVersion = svnupdate(xls_path)
 
+		# 检查版本号是否一致，减少转换
+		if os.path.exists(svn_version_file):
+			localFile = json.loads(readFile(svn_version_file))
+			if localFile['excelSvnVersion'] == xlsVersion:
+				print("Excel文件无任何修改，请提交SVN！	当前版本号： "+xlsVersion)
+				os.exit()
+
+	# 检查并创建目录
 	if not os.path.exists(lua_path):
-		os.mkdir(lua_path)
+		os.makedirs(lua_path)
 
+	# 生成模板文件
+	templeFile = os.path.join(lua_path,"DB_Template.lua")
+	if not os.path.exists(templeFile):
+		sourceFile = os.path.join(os.getcwd(),"lib/DB_Template.lua")
+		open(templeFile, "wb").write(open(sourceFile, "rb").read()) 
+
+	# 扫描所有excel文件，并读取内容
 	findAllFile(xls_path,parseExcel)
-
 	# 检查是否有错误
 	if _isError:
 		print("%s:*********************************** 文件名：%s , %s行  %s列" % (_errorDes[0],_errorDes[1],_errorDes[2],_errorDes[3]))
@@ -289,9 +315,11 @@ if __name__ == '__main__':
 			if version:
 				print("当前版本号：%s" % version)
 
-		
-		
-		
+			# 保存svn版本号
+			localFile['excelSvnVersion'] = xlsVersion
+			writeFile(svn_version_file,json.dumps(localFile,sort_keys=True,indent=4))
+
+			
 
 
 
