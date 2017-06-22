@@ -25,8 +25,10 @@ router.get('/', function(req, res, next) {
 
 		// 热更新
 		var scriptPath = process.cwd()+ "/routes/diff.py"
-		var param = [scriptPath,config.diff_old,config.diff_new,config.diff_update,config.diff_zip,config.diff_svn]
-		var cmd = param.join(' ')
+		var p=config.hot_update
+		var param = [scriptPath,p.diff_old,p.diff_new,p.diff_update,p.diff_zip,p.diff_svn,p.hot_update_file]
+		var cmd = param.join(" ")
+		console.log(cmd)
 		execPy(cmd)
 	}	
 	else if(id==4){

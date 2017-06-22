@@ -9,13 +9,20 @@ import os
 import hashlib
 import shutil
 import time
+import json
 from zipfile import *
 import zipfile
 
-m_old_path = os.path.join(os.getcwd(),"old")
-m_new_path = os.path.join(os.getcwd(),"new")
-m_diff_path = os.path.join(os.getcwd(),"hot_update")
-m_zip_path = os.path.join(os.getcwd(),"zip")
+# 上版本文件
+m_old_path = os.path.join(os.getcwd(),"diff/old")
+# 最新版本文件
+m_new_path = os.path.join(os.getcwd(),"diff/new")
+# 差异文件
+m_diff_path = os.path.join(os.getcwd(),"diff/hot_update")
+# 打包的差异文件
+m_zip_path = os.path.join(os.getcwd(),"public/hot_update")
+# 版本更新文件
+m_version_file = os.path.join(os.getcwd(),"public/version.html")
 
 
 m_config_name = "config.kongyanan" 
@@ -100,7 +107,7 @@ def dealFile(newPath , count):
 	shutil.copyfile(newPath,diffPath)
 
 	count = count + 1
-	print("%s:%s" % (str(count),diffPath.replace(m_diff_path,"")))
+	print("%s:%s" % (str(count),diffPath.replace(m_diff_path+"/","")))
 	return count
 
 def dozip():
@@ -131,17 +138,46 @@ def copy(resouse,copyto):
 	import copyfile
 	copyfile.copyImage(resouse,copyto)
 
+def writeFile(filePath,fileData):
+	f = open(filePath,"w")
+	f.write(fileData)
+	f.close()
+
+def readFile(filePath):
+	f = open(filePath,"r")
+	fileData = f.read()
+	f.close()
+	return fileData
+
+def updateVersionFile():
+	# 保存svn版本号
+	versionFile = json.loads(readFile(m_version_file))
+
+	versionFile['script_version'] += 1 
+
+	scriptInfo = {
+		"ver":versionFile['script_version'],
+		"size":zip_info[1],
+		"files":zip_info[0],
+		"compel":"0",
+		"path":"hot_update"
+	}
+	versionFile["versions"].append(scriptInfo)
+	writeFile(m_version_file,json.dumps(versionFile,sort_keys=True,indent=4))
+	print "版本信息上传成功！脚本版本号：" + str(versionFile['script_version'])
+
 if  __name__ ==  "__main__":
 
 	_isUsedSvn = False
 	zip_info = []
 	# 获取外部传入的参数
-	if len(sys.argv)==6:
+	if len(sys.argv)==7:
 		m_old_path = sys.argv[1]
 		m_new_path = sys.argv[2]
 		m_diff_path= sys.argv[3]
 		m_zip_path = sys.argv[4]
 		m_newsvn_path = sys.argv[5].split(",")
+		m_version_file = sys.argv[6]
 		_isUsedSvn = True
 
 	# 清理old文件夹下的config文件
@@ -153,22 +189,29 @@ if  __name__ ==  "__main__":
 	# 清空差异文件夹
 	if os.path.exists(m_diff_path):
 		shutil.rmtree(m_diff_path)
-	os.mkdir(m_diff_path)
+	os.makedirs(m_diff_path)
 
 	if not os.path.exists(m_old_path):
-		os.mkdir(m_old_path)
+		os.makedirs(m_old_path)
 	if not os.path.exists(m_new_path):
-		os.mkdir(m_new_path)
+		os.makedirs(m_new_path)
 	if not os.path.exists(m_zip_path):
-		os.mkdir(m_zip_path)
+		os.makedirs(m_zip_path)
+	if not os.path.exists(m_version_file):
+		originalFile = os.path.join(os.getcwd(),"lib/version.html")
+		open(m_version_file, "wb").write(open(originalFile, "rb").read()) 
 
-	# TODO 更新svn 并拷贝文件到 对比文件夹中
+	# 更新svn 并拷贝文件到 对比文件夹中
 	if _isUsedSvn:
-		for k in m_newsvn_path:
-			svnupdate(k)
-			copy(k,m_new_path)
+		for k in range(1,len(m_newsvn_path)):
+			tmp_svnPath = os.path.join(m_newsvn_path[0],m_newsvn_path[k])
+			tmp_diffPath = os.path.join(m_new_path,m_newsvn_path[k])
 
+			if not os.path.exists(tmp_diffPath):
+				os.makedirs(tmp_diffPath)
 
+			svnupdate(tmp_svnPath)	
+			copy(tmp_svnPath,tmp_diffPath)
 
 	# 旧版本 文件
 	oldFileTool = FileTool(m_old_path)
@@ -191,11 +234,15 @@ if  __name__ ==  "__main__":
 			oldmap[oldkey] = newmap.get(key)
 			count = dealFile(key,count)
 
-	
 	if count ==0:
 		print("无差异文件!")
 	else:	
+		# 保存当前文件md5配置
 		oldFileTool.saveConfigFile(oldmap)
+		# 打包
 		dozip()
-		print(zip_info)
+		print "差异文件打包成功！	包名："+zip_info[0]+"		大小："+zip_info[1]+"	字节"
+		# 更新版本文件
+		updateVersionFile()
+
 	# raw_input()

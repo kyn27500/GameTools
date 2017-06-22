@@ -6,6 +6,7 @@ import shutil
 
 
 def copyImage(pPath,newPath):
+
 	for file in os.listdir(pPath):
 		sourceFile = os.path.join(pPath,file)
 		targetFile = os.path.join(newPath,file)
