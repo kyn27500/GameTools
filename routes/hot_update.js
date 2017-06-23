@@ -4,10 +4,9 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
-	var rf=require("fs");  
-	var data=rf.readFileSync("public/version.html","utf-8");
-	res.send(data); 
- 
+	var filename = req.query.filename;
+	res.download(process.cwd()+"/public/hot_update/"+filename,filename);
+	
 });
 
 module.exports = router;
