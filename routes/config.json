@@ -24,7 +24,8 @@
 	"excelToLuaPath":"/Users/koba/Documents/workspace/kyn27500.game/db",
 	"sameFilePath":"/Users/koba/Documents/workspace/NodeJs/gametools/test",
 	"svntest":"/Users/koba/Documents/workspace/testsvn/src",
-	"doPackage":"/Users/koba/Documents/Game/LifeWinner",
+	"doPackage":"/Users/koba/Documents/workspace/svn_diff_game/LifeWinner",
+	"updateRoot":"/usr/local/Cellar/nginx/1.10.1/html/hot_update/LifeWinner",
 	"hot_update":{
 		"hot_update_file":"/usr/local/Cellar/nginx/1.10.1/html/hot_update/LifeWinner/index.html",
 		"diff_old":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/LifeWinner/old",

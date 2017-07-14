@@ -29,7 +29,13 @@ router.get('/', function(req, res, next) {
 		var param = [scriptPath,p.diff_old,p.diff_new,p.diff_update,p.diff_zip,p.diff_svn,p.hot_update_file]
 		var cmd = param.join(" ")
 		execPy(cmd)
-	}	
+	}
+	else if (id==3){
+		var scriptPath = process.cwd()+ "/routes/package.py"
+		var param = [scriptPath,config.doPackage,config.updateRoot,config.name]
+		var cmd = param.join(" ")
+		execPy(cmd)
+	}
 	else if(id==4){
 
 		// 检查相同文件
@@ -43,9 +49,6 @@ router.get('/', function(req, res, next) {
 		var scriptPath = process.cwd()+ "/routes/svn.py"
 		var cmd = scriptPath+" "+config.svntest+" 2"
 		execPy(cmd)
-	}
-	else if (id==6){
-		// var cmd = "cocos run -p android --ap android-20 -s "+config.doPackage
 	}
 	else{
 		
