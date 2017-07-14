@@ -28,7 +28,6 @@ router.get('/', function(req, res, next) {
 		var p=config.hot_update
 		var param = [scriptPath,p.diff_old,p.diff_new,p.diff_update,p.diff_zip,p.diff_svn,p.hot_update_file]
 		var cmd = param.join(" ")
-		console.log(cmd)
 		execPy(cmd)
 	}	
 	else if(id==4){
@@ -44,6 +43,9 @@ router.get('/', function(req, res, next) {
 		var scriptPath = process.cwd()+ "/routes/svn.py"
 		var cmd = scriptPath+" "+config.svntest+" 2"
 		execPy(cmd)
+	}
+	else if (id==6){
+		// var cmd = "cocos run -p android --ap android-20 -s "+config.doPackage
 	}
 	else{
 		

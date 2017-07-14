@@ -107,7 +107,7 @@ def dealFile(newPath , count):
 	shutil.copyfile(newPath,diffPath)
 
 	count = count + 1
-	print("%s:%s" % (str(count),diffPath.replace(m_diff_path+"/","")))
+	# print("%s:%s" % (str(count),diffPath.replace(m_diff_path+"/","")))
 	return count
 
 def dozip():
@@ -180,7 +180,7 @@ if  __name__ ==  "__main__":
 		m_version_file = sys.argv[6]
 		_isUsedSvn = True
 
-	# 清理old文件夹下的config文件
+	# 清理new文件夹下的config文件
 	new_config_path = os.path.join(m_new_path,m_config_name)
 	if os.path.exists(new_config_path):
 		# print("-- clean up :" + new_config_path)

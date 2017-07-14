@@ -19,19 +19,20 @@
 	}
 	},
 	{
-	"toolsPath":"公司环境",
+	"name":"LifeWinner",
 	"excelPath":"/Users/koba/Documents/workspace/kyn27500.game/xls",
 	"excelToLuaPath":"/Users/koba/Documents/workspace/kyn27500.game/db",
 	"sameFilePath":"/Users/koba/Documents/workspace/NodeJs/gametools/test",
 	"svntest":"/Users/koba/Documents/workspace/testsvn/src",
+	"doPackage":"/Users/koba/Documents/Game/LifeWinner",
 	"hot_update":{
-		"hot_update_file":"/Users/koba/Documents/workspace/NodeJs/gametools/public/version.html",
-		"diff_old":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/old",
-		"diff_new":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/new",
-		"diff_update":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/hot_update",
-		"diff_zip":"/Users/koba/Documents/workspace/NodeJs/gametools/public/hot_update",
+		"hot_update_file":"/usr/local/Cellar/nginx/1.10.1/html/hot_update/LifeWinner/index.html",
+		"diff_old":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/LifeWinner/old",
+		"diff_new":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/LifeWinner/new",
+		"diff_update":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/LifeWinner/hot_update",
+		"diff_zip":"/usr/local/Cellar/nginx/1.10.1/html/hot_update/LifeWinner/hot_update",
 		"diff_svn":[
-			"/Users/koba/Documents/workspace/kyn27500.game",
+			"/Users/koba/Documents/workspace/svn_diff_game/LifeWinner",
 			"res",
 			"src"
 		]

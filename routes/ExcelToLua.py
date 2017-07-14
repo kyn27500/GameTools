@@ -62,10 +62,13 @@ def checkTableSize(pTabData):
 	# 获取表格默认大小
 	nrows = pTabData.nrows
 	ncols = pTabData.ncols
+
+	retRow=0
+	retCol=0
 	# 检测行
 	for row in range(nrows):
 		cell = pTabData.cell(row,0)
-		if cell.ctype==2:
+		if cell.ctype>0:
 			if row >= 3:
 				if cell.value == row-2:
 					retRow = row-2
@@ -74,19 +77,13 @@ def checkTableSize(pTabData):
 					_errorDes[0]="表头ID错误"
 					_errorDes[2]=row+1
 					_errorDes[3]=1
-					
 	# 检查列
 	for col in range(ncols):
 		cell = pTabData.cell(0,col)
-		if cell.ctype==2:
-			if col >= 1:
-				if cell.value == col:
-					retCol = col
-				else:
-					_isError = True
-					_errorDes[0]="表头ID错误"
-					_errorDes[2]=1
-					_errorDes[3]=col+1
+		if cell.ctype>0:
+			retCol = col
+
+
 	return retRow,retCol
 
 # 获取表格表头数据
@@ -210,6 +207,7 @@ def parseDataByType(pkeyType,pData):
 			return "\"%s\"" % pData
 		# 数组
 		elif pkeyType[0] == dataType[2]:
+			# TODO 修改 数组模块
 			tmp=[]
 			for val in pData:
 				tmp.append(str(val))
@@ -228,6 +226,7 @@ def writeToLua(filePath,fileName,fileData):
 
 # 解析 excel
 def parseExcel(filePath,fileName):
+	# print(filePath,fileName)
 	# 读取数据
 	excel = xlrd.open_workbook(filePath)
 	pTabData = excel.sheet_by_index(0)
