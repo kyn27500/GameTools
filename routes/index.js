@@ -32,7 +32,8 @@ router.get('/', function(req, res, next) {
 	}
 	else if (id==3){
 		var scriptPath = process.cwd()+ "/routes/package.py"
-		var param = [scriptPath,config.doPackage,config.updateRoot,config.name]
+		var p=config.hot_update
+		var param = [scriptPath,config.doPackage,config.updateRoot,config.name,p.diff_svn,p.diff_old]
 		var cmd = param.join(" ")
 		execPy(cmd)
 	}

@@ -7,6 +7,7 @@
 import sys
 import os
 import json
+import shutil
 import subprocess
 
 
@@ -86,7 +87,7 @@ if  __name__ ==  "__main__":
 	_isUsedSvn = False
 
 	# 获取外部传入的参数
-	if len(sys.argv)==4:
+	if len(sys.argv)==6:
 		# 游戏根目录
 		m_game_root = sys.argv[1]
 		# 最新版本文件
@@ -102,6 +103,11 @@ if  __name__ ==  "__main__":
 
 		_isUsedSvn = True
 
+		# 更新文件目录
+		m_newsvn_path = sys.argv[4].split(",")
+		# 对比 老文件目录
+		m_diff_old_path = sys.argv[5]
+
 	if not os.path.exists(m_version_file):
 		originalFile = os.path.join(os.getcwd(),"lib/version.html")
 		open(m_version_file, "wb").write(open(originalFile, "rb").read()) 
@@ -109,7 +115,6 @@ if  __name__ ==  "__main__":
 	# 1.更新svn 
 	if _isUsedSvn:
 		svnupdate(m_game_root)
-
 
 	# 2.设置版本号
 	versironFile = json.loads(readFile(m_version_file))
@@ -122,8 +127,24 @@ if  __name__ ==  "__main__":
 	if isSuccess:
 		# 4.设置版本信息
 		updateVersionFile(versironFile)
-		# 5.提交svn 
-		svncommit(m_lua_version)
+		if _isUsedSvn:
+			# 5.提交svn 
+			svncommit(m_lua_version)
+			# 6.拷贝最新脚本到对比 目录中，以便下次脚本对比，使用最新的脚本
+
+			# 清空对比老文件
+			if os.path.exists(m_diff_old_path):
+				shutil.rmtree(m_diff_old_path)
+			os.makedirs(m_diff_old_path)
+
+			for k in range(1,len(m_newsvn_path)):
+				tmp_svnPath = os.path.join(m_newsvn_path[0],m_newsvn_path[k])
+				tmp_diffPath = os.path.join(m_diff_old_path,m_newsvn_path[k])
+
+				if not os.path.exists(tmp_diffPath):
+					os.makedirs(tmp_diffPath)
+
+				copy(tmp_svnPath,tmp_diffPath)
 
 		print "普天同庆，打包成功！包名：%s，大小：%.2fM" % (versironFile["package_name"],versironFile["filesize"]/1000000.00)
 
