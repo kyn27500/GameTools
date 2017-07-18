@@ -208,11 +208,36 @@ def parseDataByType(pkeyType,pData):
 		# 数组
 		elif pkeyType[0] == dataType[2]:
 			# TODO 修改 数组模块
-			tmp=[]
-			for val in pData:
-				tmp.append(str(val))
+			# tmp=[]
+			# for val in pData:
+			# 	tmp.append(str(val))
 
-			return "{%s}" % ", ".join(tmp)
+			# return "{%s}" % ", ".join(tmp)
+			if pData != 'nil':
+				rrr = []
+				vtmp = pData.split(',')
+				if len(vtmp)>0:
+					for i in range(len(vtmp)):
+						print vtmp[i]
+						vvtmp = vtmp[i].split('=')
+						if len(vvtmp) == 2:
+							fff = vvtmp[0]
+							sss = ("\"%s\"" % (vvtmp[1].replace('\"','\\\"')))
+							if sss == '"true"':
+								sss = 'true'
+							elif sss == '"false"':
+								sss = 'false'
+							if fff.isdigit() :
+								rrr.append('['+str(fff)+']='+sss)
+							else:
+								rrr.append(str(fff)+'='+sss)
+						else:
+							rrr.append(str(vtmp[i]))
+					pData = '{%s}' %','.join(rrr)
+				else:
+					pData = '{%s}' % (pData.replace('\"','\\\"'))
+
+                return pData
 
 
 # 写文件
