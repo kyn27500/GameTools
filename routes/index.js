@@ -6,13 +6,22 @@ var resp;
 var lock = 0
 
 var tab =' '
-// 配置文件，0在家里使用，1在公司使用
-var config = require("./config.json")[1]
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
 	// 获取ID
 	var id = req.query.id;
+	var gamename = req.query.gamename || "LifeWinner";
+
+	// 配置文件,通过gamename选择相应的配置
+	var config = require("./config.json")
+	for(k in config){
+		if (config[k].name == gamename){
+			config = config[k]
+		}
+	}
+
 	resp = res;
 
 	if(id==1){

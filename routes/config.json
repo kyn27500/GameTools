@@ -1,5 +1,6 @@
 [	
 	{
+	"name":"test",
 	"toolsPath":"家里环境",
 	"excelPath":"/Users/wangmeili/Documents/workspace/kyn27500.game/xls",
 	"excelToLuaPath":"/Users/wangmeili/Documents/workspace/kyn27500.game/db",
@@ -20,8 +21,8 @@
 	},
 	{
 	"name":"LifeWinner",
-	"excelPath":"/Users/koba/Documents/workspace/kyn27500.game/xls",
-	"excelToLuaPath":"/Users/koba/Documents/workspace/kyn27500.game/db",
+	"excelPath":"/Users/koba/Documents/cehua_docs/人生赢家/游戏数据",
+	"excelToLuaPath":"/Users/koba/Documents/Game/LifeWinner/src/app/db",
 	"sameFilePath":"/Users/koba/Documents/workspace/NodeJs/gametools/test",
 	"svntest":"/Users/koba/Documents/workspace/testsvn/src",
 	"doPackage":"/Users/koba/Documents/workspace/svn_diff_game/LifeWinner",

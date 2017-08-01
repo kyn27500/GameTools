@@ -309,15 +309,13 @@ if __name__ == '__main__':
 		# 更新excel SVN
 		xlsVersion = svnupdate(xls_path)
 
-		svncommit(lua_path)
-
 		# 检查版本号是否一致，减少转换
 		if os.path.exists(svn_version_file):
 			localFile = json.loads(readFile(svn_version_file))
 
 	# 对比 svn版本号
 	if localFile['excelSvnVersion'] == xlsVersion:
-		print("Excel文件无任何修改，请提交SVN！	当前版本号： "+xlsVersion)
+		print("Excel文件无任何修改，请提交SVN！	当前"+xlsVersion)
 	else:	
 		# 检查并创建目录
 		if not os.path.exists(lua_path):
