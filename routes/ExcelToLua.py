@@ -309,39 +309,42 @@ if __name__ == '__main__':
 		# 更新excel SVN
 		xlsVersion = svnupdate(xls_path)
 
+		svncommit(lua_path)
+
 		# 检查版本号是否一致，减少转换
 		if os.path.exists(svn_version_file):
 			localFile = json.loads(readFile(svn_version_file))
-			if localFile['excelSvnVersion'] == xlsVersion:
-				print("Excel文件无任何修改，请提交SVN！	当前版本号： "+xlsVersion)
-				os.exit()
 
-	# 检查并创建目录
-	if not os.path.exists(lua_path):
-		os.makedirs(lua_path)
+	# 对比 svn版本号
+	if localFile['excelSvnVersion'] == xlsVersion:
+		print("Excel文件无任何修改，请提交SVN！	当前版本号： "+xlsVersion)
+	else:	
+		# 检查并创建目录
+		if not os.path.exists(lua_path):
+			os.makedirs(lua_path)
 
-	# 生成模板文件
-	templeFile = os.path.join(lua_path,"DB_Template.lua")
-	if not os.path.exists(templeFile):
-		sourceFile = os.path.join(os.getcwd(),"lib/DB_Template.lua")
-		open(templeFile, "wb").write(open(sourceFile, "rb").read()) 
+		# 生成模板文件
+		templeFile = os.path.join(lua_path,"DB_Template.lua")
+		if not os.path.exists(templeFile):
+			sourceFile = os.path.join(os.getcwd(),"lib/DB_Template.lua")
+			open(templeFile, "wb").write(open(sourceFile, "rb").read()) 
 
-	# 扫描所有excel文件，并读取内容
-	findAllFile(xls_path,parseExcel)
-	# 检查是否有错误
-	if _isError:
-		print("%s:*********************************** 文件名：%s , %s行  %s列" % (_errorDes[0],_errorDes[1],_errorDes[2],_errorDes[3]))
-	else:
-		# TODO 提交svn
-		print("数据转换完毕！")
-		if isUsedSvn:
-			version = svncommit(lua_path)
-			if version:
-				print("当前版本号：%s" % version)
+		# 扫描所有excel文件，并读取内容
+		findAllFile(xls_path,parseExcel)
+		# 检查是否有错误
+		if _isError:
+			print("%s:*********************************** 文件名：%s , %s行  %s列" % (_errorDes[0],_errorDes[1],_errorDes[2],_errorDes[3]))
+		else:
+			# TODO 提交svn
+			print("数据转换完毕！")
+			if isUsedSvn:
+				version = svncommit(lua_path)
+				if version:
+					print("当前版本号：%s" % version)
 
-			# 保存svn版本号
-			localFile['excelSvnVersion'] = xlsVersion
-			writeFile(svn_version_file,json.dumps(localFile,sort_keys=True,indent=4))
+				# 保存svn版本号
+				localFile['excelSvnVersion'] = xlsVersion
+				writeFile(svn_version_file,json.dumps(localFile,sort_keys=True,indent=4))
 
 			
 
