@@ -140,7 +140,7 @@ _fileDes='''-- Filename: %s.lua
 _fileKeys = "local keys = {\n\t\"%s\"\n}\n\n"
 _fileData = "local data = {\n%s}\n\n"
 _fileDataItem = "\tid%s={%s},\n"
-_fileReturn = "%s = DB_Template.new (keys, data)\nreturn %s"
+_fileReturn = "cc.exports.%s = DB_Template.new (keys, data)\nreturn %s"
 # *******************************************************
 
 # 构造输出lua
