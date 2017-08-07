@@ -7,18 +7,25 @@ var lock = 0
 
 var tab =' '
 
+var gameList = [];
+
+var gamename;
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
 	// 获取ID
 	var id = req.query.id;
-	var gamename = req.query.gamename || "LifeWinner";
+	gamename = req.query.gamename || "LifeWinner";
 
 	// 配置文件,通过gamename选择相应的配置
-	var config = require("./config.json")
-	for(k in config){
-		if (config[k].name == gamename){
-			config = config[k]
+	var config
+	var configs=require("./config.json");
+	for(k in configs){
+		gameList[k]= configs[k].name
+
+		if (configs[k].name == gamename){
+			config = configs[k]
 		}
 	}
 
@@ -26,14 +33,14 @@ router.get('/', function(req, res, next) {
 
 	if(id==1){
 		// 数据转换
-		var scriptPath = process.cwd()+ "/routes/ExcelToLua.py"
+		var scriptPath = "./routes/ExcelToLua.py"
 		var cmd = scriptPath+' '+config.excelPath+' '+config.excelToLuaPath
 		execPy(cmd)
 	}
 	else if(id==2){
 
 		// 热更新
-		var scriptPath = process.cwd()+ "/routes/diff.py"
+		var scriptPath = "./routes/diff.py"
 		var p=config.hot_update
 		var param = [scriptPath,p.diff_old,p.diff_new,p.diff_update,p.diff_zip,p.diff_svn,p.hot_update_file]
 		var cmd = param.join(" ")
@@ -102,7 +109,6 @@ function execShell(pCmd,pCallback){
 }
 // 打印
 function printToHtml(ptext){
-	console.log(ptext);
-	resp.render('index', {text:ptext});
+	resp.render('index', {text:ptext,gamelist:encodeURI(JSON.stringify(gameList)),game:gamename});
 }
 module.exports = router;
