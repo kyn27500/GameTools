@@ -11,9 +11,9 @@ reload(sys)
 sys.setdefaultencoding('utf8') 
 
 # excel 路径
-xls_path = "/Users/koba/Documents/workspace/kyn27500.game/xls"
+xls_path = "/Users/koba/Documents/cehua_docs/人生赢家/游戏数据"
 # lua文件导出的路径
-lua_path = "/Users/koba/Documents/workspace/kyn27500.game/db"
+lua_path = "/Users/koba/Documents/Game/LifeWinner/src/app/db"
 
 # svnVersionFile 文件
 svn_version_file = os.path.join(os.getcwd(),"lib/LocalFile.json")
@@ -84,7 +84,7 @@ def checkTableSize(pTabData):
 			retCol = col
 
 
-	return retRow,retCol
+	return retRow,retCol+1
 
 # 获取表格表头数据
 def getTabTitleByExcel(pTabData,pCol):
@@ -94,8 +94,8 @@ def getTabTitleByExcel(pTabData,pCol):
 	tabKey = []
 	tabKeyType=[]
 	for col in range(pCol):
-		keyCell = pTabData.cell(2,col+1)
-		typeCell = pTabData.cell(1,col+1)
+		keyCell = pTabData.cell(2,col)
+		typeCell = pTabData.cell(1,col)
 		if keyCell.ctype == 0:
 			tabKey.append("Error")
 
@@ -126,7 +126,7 @@ def getDataByExcel(pTabData,pRow,pCol):
 	for row in range(pRow):
 		coltab=[]
 		for col in range(pCol):
-			coltab.append(pTabData.cell(row+3,col+1).value)
+			coltab.append(pTabData.cell(row+3,col).value)
 		ret.append(coltab)
 	return ret
 
@@ -170,8 +170,7 @@ def parseData(pKeyType,pData):
 	isFirst = not _isError
 	ret = ""
 	for row in range(len(pData)):
-		item=[str(row+1)]
-
+		item=[]
 		for col in range(len(pData[1])):
 			item.append(parseDataByType(pKeyType[col],pData[row][col]))
 			if isFirst and _isError:
@@ -218,7 +217,7 @@ def parseDataByType(pkeyType,pData):
 				vtmp = pData.split(',')
 				if len(vtmp)>0:
 					for i in range(len(vtmp)):
-						print vtmp[i]
+						# print vtmp[i]
 						vvtmp = vtmp[i].split('=')
 						if len(vvtmp) == 2:
 							fff = vvtmp[0]
@@ -314,7 +313,7 @@ if __name__ == '__main__':
 			localFile = json.loads(readFile(svn_version_file))
 
 	# 对比 svn版本号
-	if localFile['excelSvnVersion'] == xlsVersion:
+	if isUsedSvn and localFile['excelSvnVersion'] == xlsVersion:
 		print("Excel文件无任何修改，请提交SVN！	当前"+xlsVersion)
 	else:	
 		# 检查并创建目录
