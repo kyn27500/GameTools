@@ -16,7 +16,8 @@ xls_path = "/Users/koba/Documents/cehua_docs/人生赢家/游戏数据"
 lua_path = "/Users/koba/Documents/Game/LifeWinner/src/app/db"
 
 # svnVersionFile 文件
-svn_version_file = os.path.join(os.getcwd(),"lib/LocalFile.json")
+rootPath = os.getcwd()
+svn_version_file = os.path.join(rootPath,"lib/LocalFile.json")
 
 
 _errorDes = ["数据错误：","文件名","行数","列数"]
@@ -146,9 +147,9 @@ _fileReturn = "cc.exports.%s = DB_Template.new (keys, data)\nreturn %s"
 # 构造输出lua
 def getLuaText(pTabTitle,pData,fileName):
 	# 页面内容分四部分，介绍，keys,data,retrun template
-
 	# 文件介绍
-	luaFileName = "DB_%s" % (fileName.split(".")[0].capitalize())
+	luaFileName = "DB_%s" % (fileName.split(".")[0])
+	# fileName.split(".")[0].capitalize() #首字母大写
 	fileStr1 = _fileDes%(luaFileName)
 	# 文件keys
 	fileStr2 = _fileKeys%('\",\"'.join(pTabTitle[0]))
@@ -265,7 +266,6 @@ def parseExcel(filePath,fileName):
 	# 写入文件
 	writeToLua(filePath,filedata[0],filedata[1])
 	# 打印刚写完的文件路径
-	print(filePath)
 
 	global _isError,_errorDes
 	if _isError:
@@ -323,7 +323,7 @@ if __name__ == '__main__':
 		# 生成模板文件
 		templeFile = os.path.join(lua_path,"DB_Template.lua")
 		if not os.path.exists(templeFile):
-			sourceFile = os.path.join(os.getcwd(),"lib/DB_Template.lua")
+			sourceFile = os.path.join(rootPath,"lib/DB_Template.lua")
 			open(templeFile, "wb").write(open(sourceFile, "rb").read()) 
 
 		# 扫描所有excel文件，并读取内容
