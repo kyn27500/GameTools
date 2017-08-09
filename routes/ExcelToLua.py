@@ -102,7 +102,7 @@ def getTabTitleByExcel(pTabData,pCol):
 			_isError = True
 			_errorDes[0]="表头错误"
 			_errorDes[2]=3
-			_errorDes[3]=col+2
+			_errorDes[3]=col+1
 
 		else:
 			tabKey.append(keyCell.value)
@@ -113,7 +113,7 @@ def getTabTitleByExcel(pTabData,pCol):
 			_isError = True
 			_errorDes[0]="表头错误"
 			_errorDes[2]=2
-			_errorDes[3]=col+2
+			_errorDes[3]=col+1
 
 		else:
 			tabKeyType.append(split(typeCell.value))
@@ -175,7 +175,7 @@ def parseData(pKeyType,pData):
 			item.append(parseDataByType(pKeyType[col],pData[row][col]))
 			if isFirst and _isError:
 				_errorDes[2]=row+4
-				_errorDes[3]=col+2
+				_errorDes[3]=col+1
 				isFirst = False
 		fileItem = _fileDataItem%(row+1,", ".join(item))
 		ret = ret+fileItem
