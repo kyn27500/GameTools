@@ -2,13 +2,11 @@
 <html>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<head>
-	<title>游戏工具</title>
+	<title>游戏工具--捕鱼专用</title>
 	<script type="text/javascript">
- 
     // 点击按钮
 	  function onClick(pId){
-      var gamename = document.getElementById("gamename").value;
-	    window.location.href = "?gamename="+gamename+"&&id="+pId;
+	    window.location.href = "?id="+pId;
 	  }
 
 	</script>
@@ -16,30 +14,9 @@
   <body>
     <h1>游戏工具</h1>
 
-    <p>选择游戏：
-    <select name="gamename" id="gamename">
-    <script type="text/javascript">
-      var data = JSON.parse(decodeURI('<%= gamelist %>'));
-      for(var i = 0;i<data.length;i++){ 
-        var option 
-        if (data[i] == "<%=game%>"){
-          option = "<option value='"+data[i]+"' selected=\"selected\">"+data[i]+"</option>"
-        }else{
-          option = "<option value='"+data[i]+"'>"+data[i]+"</option>"
-        }
-        document.write(option)
-      }
-
-    </script>
-    </select> 
-    </p>
-
    	<button onclick="onClick(1)">数据转换</button>
-   	<button onclick="onClick(2)">热更新</button>
-   	<button onclick="onClick(3)">大版本更新</button>
-   	<button onclick="onClick(4)">检查重复资源</button>
-   	<button onclick="onClick(5)">test svn</button>
-   	<button onclick="onClick(6)">打包</button>
+   	<button onclick="onClick(2)">热更测试服</button>
+   	<button onclick="onClick(3)">proto文件更新</button>
 
    	<br>
    	<p id="text"><%= text %></p>

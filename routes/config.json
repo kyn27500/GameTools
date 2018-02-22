@@ -1,43 +1,7 @@
 [	
 	{
-	"name":"test",
-	"toolsPath":"家里环境",
-	"excelPath":"/Users/wangmeili/Documents/workspace/kyn27500.game/xls",
-	"excelToLuaPath":"/Users/wangmeili/Documents/workspace/kyn27500.game/db",
-	"sameFilePath":"/Users/wangmeili/Documents/workspace/kyn27500.game",
-	"svntest":"/Users/wangmeili/Documents/workspace/kyn27500.game",
-	"hot_update":{
-		"hot_update_file":"/Users/koba/Documents/workspace/NodeJs/gametools/public/version.html",
-		"diff_old":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/old",
-		"diff_new":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/new",
-		"diff_update":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/hot_update",
-		"diff_zip":"/Users/koba/Documents/workspace/NodeJs/gametools/public/hot_update",
-		"diff_svn":[
-			"/Users/koba/Documents/workspace/kyn27500.game",
-			"res",
-			"src"
-		]
-	}
-	},
-	{
-	"name":"LifeWinner",
-	"excelPath":"/Users/koba/Documents/cehua_docs/人生赢家/游戏数据",
-	"excelToLuaPath":"/Users/koba/Documents/Game/LifeWinner/src/app/db",
-	"sameFilePath":"/Users/koba/Documents/workspace/NodeJs/gametools/test",
-	"svntest":"/Users/koba/Documents/workspace/testsvn/src",
-	"doPackage":"/Users/koba/Documents/workspace/svn_diff_game/LifeWinner",
-	"updateRoot":"/usr/local/Cellar/nginx/1.10.1/html/hot_update/LifeWinner",
-	"hot_update":{
-		"hot_update_file":"/usr/local/Cellar/nginx/1.10.1/html/hot_update/LifeWinner/index.html",
-		"diff_old":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/LifeWinner/old",
-		"diff_new":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/LifeWinner/new",
-		"diff_update":"/Users/koba/Documents/workspace/NodeJs/gametools/diff/LifeWinner/hot_update",
-		"diff_zip":"/usr/local/Cellar/nginx/1.10.1/html/hot_update/LifeWinner/hot_update",
-		"diff_svn":[
-			"/Users/koba/Documents/workspace/svn_diff_game/LifeWinner",
-			"res",
-			"src"
-		]
-	}
+	"name":"fish",
+	"excelPath":"/Users/koba/Documents/svn_fish/cehua/excel",
+	"excelToLuaPath":"/Users/koba/Documents/work/client/modules/fish/src/db"
 	}
 ]

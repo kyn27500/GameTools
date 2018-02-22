@@ -2,7 +2,7 @@
 -- Author: kong.
 -- Function: a template for LUA DB.
 
-cc.exports.DB_Template = {}
+local DB_Template = {}
 
 local hcopy = nil
 
@@ -129,3 +129,4 @@ DB_Template.new = function(keys, data )
 	return obj
 end
 
+return DB_Template

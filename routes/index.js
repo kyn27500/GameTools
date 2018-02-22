@@ -9,28 +9,23 @@ var tab =' '
 
 var gameList = [];
 
-var gamename;
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
 	// 获取ID
 	var id = req.query.id;
-	gamename = req.query.gamename || "LifeWinner";
 
 	// 配置文件,通过gamename选择相应的配置
 	var config
 	var configs=require("./config.json");
 	for(k in configs){
-		gameList[k]= configs[k].name
-
-		if (configs[k].name == gamename){
+		if (configs[k].name == "fish"){
 			config = configs[k]
 		}
 	}
 
 	resp = res;
-
+	console.log("点击ID：",id)
 	if(id==1){
 		// 数据转换
 		var scriptPath = "./routes/ExcelToLua.py"
@@ -109,6 +104,6 @@ function execShell(pCmd,pCallback){
 }
 // 打印
 function printToHtml(ptext){
-	resp.render('index', {text:ptext,gamelist:encodeURI(JSON.stringify(gameList)),game:gamename});
+	resp.render('index', {text:ptext});
 }
 module.exports = router;

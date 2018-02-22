@@ -11,9 +11,9 @@ reload(sys)
 sys.setdefaultencoding('utf8') 
 
 # excel 路径
-xls_path = "/Users/koba/Documents/cehua_docs/人生赢家/游戏数据"
+xls_path = "/Users/koba/Documents/svn_fish/cehua/excel"
 # lua文件导出的路径
-lua_path = "/Users/koba/Documents/Game/LifeWinner/src/app/db"
+lua_path = "/Users/koba/Documents/work/client/modules/fish/src/db"
 
 # svnVersionFile 文件
 rootPath = os.getcwd()
@@ -141,7 +141,7 @@ _fileDes='''-- Filename: %s.lua
 _fileKeys = "local keys = {\n\t\"%s\"\n}\n\n"
 _fileData = "local data = {\n%s}\n\n"
 _fileDataItem = "\tid%s={%s},\n"
-_fileReturn = "cc.exports.%s = DB_Template.new (keys, data)\nreturn %s"
+_fileReturn = "local %s = require(\"fish/src/db/DB_Template\").new( keys, data)\nreturn %s"
 # *******************************************************
 
 # 构造输出lua
@@ -195,7 +195,6 @@ def parseDataByType(pkeyType,pData):
 	elif(not isHasData):
 		return "nil"
 	else:
-
 		# 数字
 		if pkeyType[0] == dataType[0]:
 			if int(pData) == pData:
@@ -313,8 +312,9 @@ if __name__ == '__main__':
 			localFile = json.loads(readFile(svn_version_file))
 
 	# 对比 svn版本号
+	print(xls_path,xlsVersion)
 	if isUsedSvn and localFile['excelSvnVersion'] == xlsVersion:
-		print("Excel文件无任何修改，请提交SVN！	当前"+xlsVersion)
+		print("Excel文件无任何修改，请提交SVN！	当前版本号："+xlsVersion)
 	else:	
 		# 检查并创建目录
 		if not os.path.exists(lua_path):
